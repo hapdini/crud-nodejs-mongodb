@@ -67,7 +67,6 @@ module.exports = {
                 .then((data) => {
                     result.status = status;
                     result.result = data;
-                    clearCache(data.id)
                     res.status(status).send(result);
                 })
                 .catch((err) => {
@@ -113,11 +112,8 @@ module.exports = {
         let result = {};
         let status = 200;
         const payload = req.decoded;
-        // TODO: Log the payload here to verify that it's the same payload
-        // we used when we created the token
-        // console.log('PAYLOAD', payload);
         if (payload && payload.data === 'admin') {
-            User.find({ accountNumber: req.params.accountNumber })
+            User.findOne({ accountNumber: req.params.accountNumber })
                 .cache(req.params.accountNumber)
                 .then((data) => {
                     result.status = status;
@@ -142,9 +138,6 @@ module.exports = {
         let result = {};
         let status = 200;
         const payload = req.decoded;
-        // TODO: Log the payload here to verify that it's the same payload
-        // we used when we created the token
-        // console.log('PAYLOAD', payload);
         if (payload && payload.data === 'admin') {
             User.find({ identityNumber: req.params.identityNumber })
                 .cache(req.params.identityNumber)
@@ -172,9 +165,6 @@ module.exports = {
         let status = 200;
         const { id, userName, accountNumber, emailAddress, identityNumber, password } = req.body;
         const payload = req.decoded;
-        // TODO: Log the payload here to verify that it's the same payload
-        // we used when we created the token
-        // console.log('PAYLOAD', payload);
         if (payload && payload.data === 'admin') {
             User.findByIdAndUpdate(req.params.userId, {
                 id: id,
@@ -208,9 +198,6 @@ module.exports = {
         let result = {};
         let status = 200;
         const payload = req.decoded;
-        // TODO: Log the payload here to verify that it's the same payload
-        // we used when we created the token
-        // console.log('PAYLOAD', payload);
         if (payload && payload.data === 'admin') {
             User.findByIdAndRemove(req.params.userId)
                 .then(() => {
