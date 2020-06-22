@@ -1,0 +1,34 @@
+{
+  "name": "yuni-wahyu-hapdini",
+  "version": "1.0.0",
+  "description": "microseservices (nodejs) for CRUD operation and store in database (mongodb)",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.19",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development nodemon index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "yuni wahyu hapdini",
+  "license": "ISC"
+}
