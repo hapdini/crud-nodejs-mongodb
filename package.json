@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "microseservices (nodejs) for CRUD operation and store in database (mongodb)",
   "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
