@@ -11,11 +11,11 @@ module.exports = {
         const { id, password } = req.body;
         let result = {};
         let status = 200;
-        User.findOne({ id:id })
+        User.findOne({ id: id })
             .then((data) => {
                 if (data) {
-                    console.log('data : '+data)
-                    console.log('data : '+data.password)
+                    console.log('data : ' + data)
+                    console.log('data : ' + data.password)
                     bcrypt.compare(password, data.password).then(match => {
                         if (match) {
                             status = 200;
@@ -113,7 +113,11 @@ module.exports = {
         let status = 200;
         const payload = req.decoded;
         if (payload && payload.data === 'admin') {
-            User.findOne({ accountNumber: req.params.accountNumber })
+            User.findOne({ accountNumber: req.params.accountNumber }, (err, user) => {
+            if (err) {
+                console.log('error : ' + err)
+                console.log('user : ' + user)
+            }})
                 .cache(req.params.accountNumber)
                 .then((data) => {
                     result.status = status;
