@@ -14,8 +14,6 @@ module.exports = {
         User.findOne({ id: id })
             .then((data) => {
                 if (data) {
-                    console.log('data : ' + data)
-                    console.log('data : ' + data.password)
                     bcrypt.compare(password, data.password).then(match => {
                         if (match) {
                             status = 200;
@@ -111,14 +109,9 @@ module.exports = {
     getByAccountNumber: async (req, res) => {
         let result = {};
         let status = 200;
-        let accountNumber = req.params.accountNumber
         const payload = req.decoded;
         if (payload && payload.data === 'admin') {
-            User.findOne({ accountNumber: accountNumber }, (err, user) => {
-            if (err) {
-                console.log('error : ' + err)
-                console.log('user : ' + user)
-            }})
+            User.find({ accountNumber: req.params.accountNumber })
                 .cache(req.params.accountNumber)
                 .then((data) => {
                     result.status = status;
@@ -132,6 +125,7 @@ module.exports = {
                     res.status(status).send(result);
                 })
         } else {
+            console.log('4');
             status = 401;
             result.status = status;
             result.error = `Authentication error`;
@@ -182,7 +176,7 @@ module.exports = {
                 .then((data) => {
                     result.status = status;
                     result.result = data;
-                    clearCache(data._id)
+                    clearCache(req.params.userId)
                     res.status(status).send(result);
                 })
                 .catch((err) => {
@@ -206,9 +200,10 @@ module.exports = {
         if (payload && payload.data === 'admin') {
             User.findByIdAndRemove(req.params.userId)
                 .then(() => {
+                    result = "Delete Successfully";
                     result.status = status;
-                    result.result = "Delete Successfully";
-                    clearCache(data.id)
+                    result.result = result;
+                    clearCache(req.params.userId)
                     res.status(status).send(result);
                 })
                 .catch((err) => {
