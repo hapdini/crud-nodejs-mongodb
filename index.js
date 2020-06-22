@@ -47,8 +47,8 @@ if (environment !== 'production') {
     app.use(logger('dev'));
 }
 
-app.listen(`${stage.port}`, () => {
-    console.log(`Server now listening at localhost:${stage.port}`);
+app.listen(process.env.PORT, () => {
+    console.log('Server now listening on ' + process.env.PORT);
 });
 
 module.exports = app;
