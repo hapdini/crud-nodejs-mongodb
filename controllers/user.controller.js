@@ -111,9 +111,10 @@ module.exports = {
     getByAccountNumber: async (req, res) => {
         let result = {};
         let status = 200;
+        let accountNumber = req.params.accountNumber
         const payload = req.decoded;
         if (payload && payload.data === 'admin') {
-            User.findOne({ accountNumber: req.params.accountNumber }, (err, user) => {
+            User.findOne({ accountNumber: accountNumber }, (err, user) => {
             if (err) {
                 console.log('error : ' + err)
                 console.log('user : ' + user)
