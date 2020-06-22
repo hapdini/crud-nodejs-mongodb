@@ -14,6 +14,8 @@ module.exports = {
         User.findOne({ id:id })
             .then((data) => {
                 if (data) {
+                    console.log('data : '+data)
+                    console.log('data : '+data.password)
                     bcrypt.compare(password, data.password).then(match => {
                         if (match) {
                             status = 200;
