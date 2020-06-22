@@ -11,7 +11,7 @@ module.exports = {
         const { id, password } = req.body;
         let result = {};
         let status = 200;
-        User.findOne({ id })
+        User.findOne({ id:id })
             .then((data) => {
                 if (data) {
                     bcrypt.compare(password, data.password).then(match => {
